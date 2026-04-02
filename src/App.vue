@@ -35,22 +35,22 @@ export default {
       navLinks: [
         {
           name: 'SaveTools',
-          label: 'Save Editor',
+          label: this.$t('app.saveEditor'),
           url: '/',
         },
         {
           name: 'SubTools',
-          label: 'Submarine Editor',
+          label: this.$t('app.submarineEditor'),
           url: '/SubTools',
         },
         {
           name: 'Decompressor',
-          label: 'Save Decompressor',
+          label: this.$t('app.saveDecompressor'),
           url: '/Decompressor',
         },
         {
           name: 'About',
-          label: 'About',
+          label: this.$t('app.about'),
           url: '/About',
         },
       ],

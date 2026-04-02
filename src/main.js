@@ -3,6 +3,7 @@ import vuetify from '@/plugins/vuetify'
 import App from '@/App.vue'
 import router from '@/router'
 import store from '@/store'
+import i18n from '@/i18n'
 
 import { registerSW } from 'virtual:pwa-register'
 registerSW({
@@ -16,6 +17,7 @@ counter()
 const app = createApp(App)
 app.use(router)
 app.use(store)
+app.use(i18n)
 app.use(vuetify)
 
 app.mount('#app')
