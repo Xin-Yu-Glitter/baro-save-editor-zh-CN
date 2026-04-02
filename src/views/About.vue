@@ -4,10 +4,10 @@
       <v-col>
         <v-sheet elevation="1" class="buttonWrapper">
           <v-btn :class="{ 'text-black': !subEditor }" color="secondary" class="mx-2" @click="subEditor = false">
-            About Save Editor
+            {{ $t('aboutSaveEditor.aboutSaveEditor') }}
           </v-btn>
           <v-btn :class="{ 'text-black': subEditor }" color="secondary" class="mx-2" @click="subEditor = true">
-            About Submarine Editor
+            {{ $t('aboutSubEditor.aboutSubEditor') }}
           </v-btn>
         </v-sheet>
       </v-col>
@@ -16,8 +16,8 @@
       <v-col>
         <v-sheet elevation="1" class="pa-2" style="text-align: center">
           <b>
-            Note: Always back up the original file before replacing it with the downloaded one.<br />
-            Even if something had worked for you before, there is always a risk that a game update breaks some stuff.
+            {{ $t('about.note') }}<br />
+            {{ $t('about.risk') }}
           </b>
         </v-sheet>
       </v-col>
@@ -27,11 +27,11 @@
     <v-row>
       <v-col>
         <v-sheet elevation="1" class="pa-2" style="text-align: center">
-          If the editor freezes, crashes or outputs corrupted file feel free to create a
+          {{ $t('about.ifEditorFreezes') }}
           <a style="color: rgb(var(--v-theme-secondary))" href="https://github.com/ignis05/baro-save-editor/issues">
-            github issue
+            {{ $t('about.githubIssue') }}
           </a>
-          attaching original file(s) and providing steps for reproduction.
+          {{ $t('about.attachingOriginal') }}
         </v-sheet>
       </v-col>
     </v-row>

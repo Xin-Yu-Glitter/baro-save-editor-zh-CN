@@ -4,7 +4,7 @@ import zhCN from './zh-CN.js'
 
 const i18n = createI18n({
   legacy: false,
-  locale: localStorage.getItem('locale') || 'en-US',
+  locale: localStorage.getItem('locale') || 'zh-CN',
   fallbackLocale: 'en-US',
   messages: {
     'en-US': enUS,
