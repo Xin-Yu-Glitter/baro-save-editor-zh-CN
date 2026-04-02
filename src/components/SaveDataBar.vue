@@ -2,10 +2,10 @@
   <v-col>
     <v-card elevation="1" class="pr-2">
       <v-btn :color="blockDownload ? 'surface' : 'secondary'" :disabled="blockDownload" @click="download">
-        Download
+        {{ $t('saveDataBar.download') }}
       </v-btn>
       <div class="float-right ma-1">
-        Loaded file: <span class="text-primary">{{ filename }}</span> , Save date:
+        {{ $t('saveDataBar.loadedFile') }}: <span class="text-primary">{{ filename }}</span> , {{ $t('saveDataBar.saveDate') }}:
         <span class="text-primary">{{ modificationDate }}</span>
       </div>
     </v-card>

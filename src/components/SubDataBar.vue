@@ -2,11 +2,11 @@
   <v-col>
     <v-card elevation="1" class="pr-2">
       <v-btn class="mr-4" :color="blockDownload ? 'surface' : 'secondary'" :disabled="blockDownload" @click="download">
-        Download
+        {{ $t('subDataBar.download') }}
       </v-btn>
       <v-icon
         size="32"
-        title="load to savefile"
+        :title="$t('subDataBar.loadToSavefile')"
         :color="buttonActive ? 'secondary' : 'grey'"
         :class="{ iconButton: buttonActive }"
         @click="pushToSaveEditor"
@@ -14,7 +14,7 @@
         mdi-clipboard-arrow-left-outline
       </v-icon>
       <div class="float-right ma-1">
-        Loaded file: <span class="text-primary">{{ filename }}</span> ,   submarine name:
+        {{ $t('subDataBar.loadedFile') }}: <span class="text-primary">{{ filename }}</span> ,   {{ $t('subDataBar.submarineName') }}:
         <span class="text-primary">{{ subname }}</span>
       </div>
     </v-card>

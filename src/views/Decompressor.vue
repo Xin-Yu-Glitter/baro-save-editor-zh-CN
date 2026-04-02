@@ -5,19 +5,16 @@
       <v-col>
         <v-card>
           <v-card-text style="opacity: 1">
-            <div class="text-white text-center text-h5">Simple save decompression and compression tools.</div>
+            <div class="text-white text-center text-h5">{{ $t('decompressor.title') }}</div>
             <div class="text-center d-flex flex-row justify-center align-center">
-              Your save files should be in <span class="text-primary ml-2">{{ saveLocation }}</span>
+              {{ $t('decompressor.yourSaveLocation') }} <span class="text-primary ml-2">{{ saveLocation }}</span>
               <div>
                 <v-icon @click="copyPath" color="secondary" class="iconButton ml-3"> mdi-clipboard-outline </v-icon>
-                <v-tooltip anchor="bottom" activator="parent">Copy path to clipboard</v-tooltip>
+                <v-tooltip anchor="bottom" activator="parent">{{ $t('decompressor.copyPath') }}</v-tooltip>
               </div>
             </div>
             <div class="text-center mt-2">
-              <span class="text-orange">Warning:</span> This tool uses experimental File System API - it might not work
-              correctly in some browsers.<br />It's also unable to access directories where some system files might be
-              (this includes anything inside AppData directory - so you will need to copy the saves you want to
-              decompress somewhere accessible).
+              <span class="text-orange">{{ $t('decompressor.warning') }}:</span> {{ $t('decompressor.warningText') }}
             </div>
           </v-card-text>
         </v-card>
@@ -27,7 +24,7 @@
     <v-row>
       <v-col>
         <v-card>
-          <v-card-header class="text-h4 justify-center">Select working directory</v-card-header>
+          <v-card-header class="text-h4 justify-center">{{ $t('decompressor.selectWorkingDir') }}</v-card-header>
           <div class="d-flex justify-center align-center mb-4">
             <div
               class="mr-4 mb-0 text-white d-inline-flex text-h5 justify-center"
@@ -38,11 +35,11 @@
                 border-radius: 5px;
               "
             >
-              {{ workingDir.name || 'none' }}
+              {{ workingDir.name || $t('decompressor.none') }}
             </div>
             <v-btn color="secondary" variant="outlined" type="icon" elevation="1" @click="selectWorkingDir">
               <v-icon size="large">mdi-folder-search-outline</v-icon>
-              <v-tooltip anchor="bottom" activator="parent">Select working directory</v-tooltip>
+              <v-tooltip anchor="bottom" activator="parent">{{ $t('decompressor.selectWorkingDir') }}</v-tooltip>
             </v-btn>
             <v-btn
               class="ml-2"
@@ -54,7 +51,7 @@
               @click="scanWorkingDir"
             >
               <v-icon size="large">mdi-folder-sync-outline</v-icon>
-              <v-tooltip anchor="bottom" activator="parent">Refresh directory</v-tooltip>
+              <v-tooltip anchor="bottom" activator="parent">{{ $t('decompressor.refreshDir') }}</v-tooltip>
             </v-btn>
           </div>
         </v-card>
@@ -64,7 +61,7 @@
     <v-row v-if="workingDir.handle">
       <v-col>
         <v-card>
-          <v-card-header class="text-h5 justify-center">Detected saves</v-card-header>
+          <v-card-header class="text-h5 justify-center">{{ $t('decompressor.detectedSaves') }}</v-card-header>
           <div class="d-flex flex-column justify-start align-center mb-4">
             <div
               v-for="save of this.savesList"
@@ -84,7 +81,7 @@
                 @click="decompress(save)"
               >
                 <v-icon size="large">mdi-package-variant</v-icon>
-                <v-tooltip anchor="bottom" activator="parent">Decompress save</v-tooltip>
+                <v-tooltip anchor="bottom" activator="parent">{{ $t('decompressor.decompress') }}</v-tooltip>
               </v-btn>
               <v-btn
                 :color="save.decompressed ? 'secondary' : 'grey'"
@@ -96,7 +93,7 @@
                 @click="compress(save)"
               >
                 <v-icon size="large">mdi-package-variant-closed</v-icon>
-                <v-tooltip anchor="bottom" activator="parent">Compress save</v-tooltip>
+                <v-tooltip anchor="bottom" activator="parent">{{ $t('decompressor.compress') }}</v-tooltip>
               </v-btn>
             </div>
           </div>
@@ -108,19 +105,18 @@
       <v-col>
         <v-card class="d-flex align-center justify-center">
           <v-card-text style="opacity: 1">
-            How to use:
+            {{ $t('decompressor.howToUse') }}:
             <ol class="pl-4 mb-2">
-              <li>Select a directory in a location accessible by the API (Desktop, Documents, etc.)</li>
-              <li>The tool will detect all compressed and decompressed saves directly in that selected directory</li>
-              <li><v-icon color="secondary">mdi-package-variant</v-icon> button decompresses the save</li>
-              <li><v-icon color="secondary">mdi-package-variant-closed</v-icon> button compresses the save</li>
+              <li>{{ $t('decompressor.step1') }}</li>
+              <li>{{ $t('decompressor.step2') }}</li>
+              <li><v-icon color="secondary">mdi-package-variant</v-icon> {{ $t('decompressor.step3') }}</li>
+              <li><v-icon color="secondary">mdi-package-variant-closed</v-icon> {{ $t('decompressor.step4') }}</li>
               <li>
-                You can use <v-icon color="secondary">mdi-folder-sync-outline</v-icon> to refresh the current directory
-                or <v-icon color="secondary">mdi-folder-search-outline</v-icon> to select a different one.
+                {{ $t('decompressor.step5') }} <v-icon color="secondary">mdi-folder-sync-outline</v-icon> {{ $t('decompressor.step5a') }}
+                <v-icon color="secondary">mdi-folder-search-outline</v-icon> {{ $t('decompressor.step5b') }}.
               </li>
             </ol>
-            If file / directory with a matching name exists when compressing/decompressing the save, it will be
-            overwritten.
+            {{ $t('decompressor.overwriteNote') }}
           </v-card-text>
         </v-card>
       </v-col>
@@ -165,9 +161,9 @@ export default {
         // window.showDirectoryPicker is not a function
         if (err instanceof TypeError) {
           return this.$store.dispatch('showAlert', {
-            type: 'error',
-            text: `Failed to use the File System API. It seems like it's not supported by your browser.`,
-          })
+          type: 'error',
+          text: this.$t('decompressor.fileSystemApiFail'),
+        })
         }
         // user canceled file selector - do nothing
         if (err instanceof DOMException) {
@@ -186,7 +182,7 @@ export default {
 
       this.$store.dispatch('showAlert', {
         type: 'success',
-        text: `Opened ${dirHandle.name} as the working directory.`,
+        text: this.$t('decompressor.openedWorkingDir', { name: dirHandle.name }),
       })
     },
     /** Scans working dir, detecting compressed and decompressed saves */
@@ -221,7 +217,7 @@ export default {
       await navigator.clipboard.writeText(this.saveLocation)
       this.$store.dispatch('showAlert', {
         type: 'success',
-        text: `Copied save path to system clipboard.`,
+        text: this.$t('decompressor.copiedPath'),
       })
     },
 
@@ -238,7 +234,7 @@ export default {
         if ((await workingDir.requestPermission({ mode: 'readwrite' })) !== 'granted')
           return this.$store.dispatch('showAlert', {
             type: 'error',
-            text: `Failed get file system permissions.`,
+            text: this.$t('decompressor.permissionDenied'),
           })
 
       // read and decompress save file
@@ -269,7 +265,7 @@ export default {
 
       this.$store.dispatch('showAlert', {
         type: 'success',
-        text: `Decompressed ${saveFile.name}`,
+        text: this.$t('decompressor.decompressed', { name: saveFile.name }),
       })
     },
     // compressor methods
@@ -286,7 +282,7 @@ export default {
         if ((await workingDir.requestPermission({ mode: 'readwrite' })) !== 'granted')
           return this.$store.dispatch('showAlert', {
             type: 'error',
-            text: `Failed get file system permissions.`,
+            text: this.$t('decompressor.permissionDenied'),
           })
 
       // read files from dir and add them to the save
@@ -316,7 +312,7 @@ export default {
 
       this.$store.dispatch('showAlert', {
         type: 'success',
-        text: `Compressed ${save.name}`,
+        text: this.$t('decompressor.compressed', { name: save.name }),
       })
     },
   },

@@ -1,7 +1,7 @@
 <template>
   <v-card elevation="1" class="pb-2">
     <v-card-header class="flex-column align-center">
-      <v-card-title>{{ isMultiPlayer ? 'Hired Bots' : 'Current Crew' }}</v-card-title>
+      <v-card-title>{{ isMultiPlayer ? $t('crewList.hiredBots') : $t('crewList.currentCrew') }}</v-card-title>
     </v-card-header>
     <v-sheet class="mb-2" id="crewListWrapper">
       <v-sheet
@@ -12,29 +12,29 @@
         <div class="name">{{ el.attributes.name }}</div>
         <v-spacer></v-spacer>
         <v-icon style="cursor: grabbing" class="grabHandle" color="secondary">mdi-drag-horizontal-variant</v-icon>
-        <v-icon title="Edit character" color="secondary" class="iconButton" @click="editChar(el)">
+        <v-icon :title="$t('crewList.editChar')" color="secondary" class="iconButton" @click="editChar(el)">
           mdi-file-edit-outline
         </v-icon>
-        <v-icon title="Delete character" color="red" class="iconButton" @click="deleteChar(el)">
+        <v-icon :title="$t('crewList.deleteChar')" color="red" class="iconButton" @click="deleteChar(el)">
           mdi-delete-outline
         </v-icon>
       </v-sheet>
     </v-sheet>
     <v-sheet class="d-flex flex-row align-center pl-4 pr-2">
-      <v-btn v-if="canExportPlayers" title="Export player characters" icon size="x-small" @click="exportPlayers">
+      <v-btn v-if="canExportPlayers" :title="$t('crewList.exportPlayers')" icon size="x-small" @click="exportPlayers">
         <v-icon color="secondary">mdi-file-download-outline</v-icon>
       </v-btn>
-      <div class="pt-1">Add:</div>
+      <div class="pt-1">{{ $t('crewList.add') }}:</div>
       <v-spacer></v-spacer>
-      <v-btn title="Add new assistant character" icon size="x-small" @click="addNew">
+      <v-btn :title="$t('crewList.addNewAssistant')" icon size="x-small" @click="addNew">
         <v-icon color="secondary">mdi-account-plus-outline</v-icon>
       </v-btn>
-      <v-btn title="Add character from xml" icon size="x-small" @click="addCharDialog = true">
+      <v-btn :title="$t('crewList.addCharFromXml')" icon size="x-small" @click="addCharDialog = true">
         <v-icon color="secondary">mdi-account-edit-outline</v-icon>
         <v-dialog class="editCharacter" v-model="addCharDialog">
           <v-card class="d-flex flex-column" style="width: 100%; height: 100%">
             <v-card-title>
-              <span class="text-h5">Add character from xml</span>
+              <span class="text-h5">{{ $t('crewList.addCharFromXml') }}</span>
             </v-card-title>
             <v-card-text class="d-flex flex-grow-1">
               <textarea
@@ -45,13 +45,13 @@
             </v-card-text>
             <v-card-actions style="flex: 0 1 auto">
               <v-spacer></v-spacer>
-              <v-btn color="red darken-1" text @click="addCharDialog = false"> Cancel </v-btn>
-              <v-btn color="green darken-1" text @click="addFromInput"> Add </v-btn>
+              <v-btn color="red darken-1" text @click="addCharDialog = false"> {{ $t('crewList.cancel') }} </v-btn>
+              <v-btn color="green darken-1" text @click="addFromInput"> {{ $t('crewList.add') }} </v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
       </v-btn>
-      <v-btn title="Paste character xml from clipboard" icon size="x-small" @click="addFromClip">
+      <v-btn :title="$t('crewList.pasteCharXml')" icon size="x-small" @click="addFromClip">
         <v-icon color="secondary">mdi-clipboard-arrow-up-outline</v-icon>
       </v-btn>
     </v-sheet>
@@ -60,7 +60,7 @@
     <v-card class="d-flex flex-column mainCard" style="width: 100%; height: 100%">
       <v-card-title style="background-color: rgb(var(--v-theme-primary))">
         <span class="text-h4"
-          >Editing <span class="text-black">{{ charClone?.attributes?.name }}</span></span
+          >{{ $t('crewList.editing') }} <span class="text-black">{{ charClone?.attributes?.name }}</span></span
         >
       </v-card-title>
       <v-card-text v-if="charClone" class="d-flex flex-grow-1">
@@ -68,12 +68,12 @@
           <v-col>
             <v-card elevation="1">
               <v-card-title>
-                <span class="text-h4">General</span>
+                <span class="text-h4">{{ $t('crewList.general') }}</span>
               </v-card-title>
               <v-card-text class="charEditCardText">
                 <div>
                   <v-text-field
-                    label="Name"
+                    :label="$t('crewList.name')"
                     variant="outlined"
                     style="color: white; min-width: 200px"
                     class="mb-4 mt-3"
@@ -82,14 +82,14 @@
                   />
                 </div>
                 <div>
-                  <div class="text-h5">Raw xml:</div>
-                  <v-btn title="Copy character xml to clipboard" size="x-small" icon @click="copyChar">
+                  <div class="text-h5">{{ $t('crewList.rawXml') }}:</div>
+                  <v-btn :title="$t('crewList.copyXml')" size="x-small" icon @click="copyChar">
                     <v-icon color="secondary">mdi-clipboard-arrow-down-outline</v-icon>
                   </v-btn>
-                  <v-btn title="Paste character xml from clipboard" size="x-small" icon @click="pasteChar">
+                  <v-btn :title="$t('crewList.pasteXml')" size="x-small" icon @click="pasteChar">
                     <v-icon color="secondary">mdi-clipboard-arrow-up-outline</v-icon>
                   </v-btn>
-                  <v-btn title="Edit raw xml" size="x-small" icon @click="rawEditChar">
+                  <v-btn :title="$t('crewList.editRawXml')" size="x-small" icon @click="rawEditChar">
                     <v-icon color="secondary">mdi-file-edit-outline</v-icon>
                   </v-btn>
                 </div>
@@ -99,22 +99,22 @@
           <v-col>
             <v-card elevation="1">
               <v-card-title>
-                <span class="text-h4">Job &amp; Skills</span>
+                <span class="text-h4">{{ $t('crewList.jobSkills') }}</span>
               </v-card-title>
               <v-card-text class="charEditCardText">
                 <div>
-                  <div class="text-h5">Job:</div>
+                  <div class="text-h5">{{ $t('crewList.job') }}:</div>
                   <select :class="cloneJob.attributes.identifier" v-model="cloneJob.attributes.identifier">
-                    <option class="captain" value="captain">Captain</option>
-                    <option class="securityofficer" value="securityofficer">Security Officer</option>
-                    <option class="medicaldoctor" value="medicaldoctor">Medical Doctor</option>
-                    <option class="engineer" value="engineer">Engineer</option>
-                    <option class="mechanic" value="mechanic">Mechanic</option>
-                    <option class="assistant" value="assistant">Assistant</option>
+                    <option class="captain" value="captain">{{ $t('crewList.captain') }}</option>
+                    <option class="securityofficer" value="securityofficer">{{ $t('crewList.securityOfficer') }}</option>
+                    <option class="medicaldoctor" value="medicaldoctor">{{ $t('crewList.medicalDoctor') }}</option>
+                    <option class="engineer" value="engineer">{{ $t('crewList.engineer') }}</option>
+                    <option class="mechanic" value="mechanic">{{ $t('crewList.mechanic') }}</option>
+                    <option class="assistant" value="assistant">{{ $t('crewList.assistant') }}</option>
                   </select>
                 </div>
                 <div>
-                  <div class="text-h5">Skills</div>
+                  <div class="text-h5">{{ $t('crewList.skills') }}</div>
                   <div>
                     <div v-for="skill of cloneJob.elements" :key="skill.attributes.identifier">
                       <div>{{ skill.attributes.identifier }}</div>
@@ -130,8 +130,8 @@
       </v-card-text>
       <v-card-actions style="flex: 0 1 auto">
         <v-spacer></v-spacer>
-        <v-btn color="red darken-1" text @click="editDialogClose()"> Cancel </v-btn>
-        <v-btn color="green darken-1" text @click="editDialogSave()"> Save </v-btn>
+        <v-btn color="red darken-1" text @click="editDialogClose()"> {{ $t('crewList.cancel') }} </v-btn>
+        <v-btn color="green darken-1" text @click="editDialogSave()"> {{ $t('crewList.save') }} </v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -214,22 +214,22 @@ export default {
         } catch (err) {
           console.warn(err)
           this.$store.dispatch('showAlert', {
-            type: 'error',
-            text: `XML parser fail: ${err.message}`,
-          })
+        type: 'error',
+        text: this.$t('crewList.xmlParserFail', { err: err.message }),
+      })
           return
         }
         if (!newChar.attributes.name) {
           this.$store.dispatch('showAlert', {
-            type: 'error',
-            text: `Failed to read character name - file may be invalid or corrupted`,
-          })
+        type: 'error',
+        text: this.$t('crewList.readCharNameFail'),
+      })
           return
         }
         this.charClone = newChar
         this.$store.dispatch('showAlert', {
           type: 'success',
-          text: `Loaded ${this.charClone.attributes.name} xml changes.`,
+          text: this.$t('crewList.loadedXmlChanges', { name: this.charClone.attributes.name }),
         })
         this.showTextarea = false
         return
@@ -249,7 +249,7 @@ export default {
       this.selectedChar = null
       this.$store.dispatch('showAlert', {
         type: 'success',
-        text: `Modified character ${this.charClone.attributes.name}`,
+        text: this.$t('crewList.modifiedChar', { name: this.charClone.attributes.name }),
       })
       this.charClone = null
     },
@@ -259,7 +259,7 @@ export default {
       this.crewList.elements.splice(index, 1)
       this.$store.dispatch('showAlert', {
         type: 'success',
-        text: `Removed ${el.attributes.name} from the crew.`,
+        text: this.$t('crewList.removedFromCrew', { name: el.attributes.name }),
       })
     },
     async copyChar() {
@@ -267,7 +267,7 @@ export default {
       await navigator.clipboard.writeText(xmlString)
       this.$store.dispatch('showAlert', {
         type: 'success',
-        text: `Copied ${this.charClone.attributes.name} to system clipboard.`,
+        text: this.$t('crewList.copiedToClipboard', { name: this.charClone.attributes.name }),
       })
     },
     async pasteChar() {
@@ -279,21 +279,21 @@ export default {
         console.warn(err)
         this.$store.dispatch('showAlert', {
           type: 'error',
-          text: `XML parser fail: ${err.message}`,
+          text: this.$t('crewList.xmlParserFail', { err: err.message }),
         })
         return
       }
       if (!newChar.attributes.name) {
         this.$store.dispatch('showAlert', {
           type: 'error',
-          text: `Failed to read character name - file may be invalid or corrupted`,
+          text: this.$t('crewList.readCharNameFail'),
         })
         return
       }
       this.charClone = newChar
       this.$store.dispatch('showAlert', {
         type: 'success',
-        text: `Pasted ${this.charClone.attributes.name} from system clipboard.`,
+        text: this.$t('crewList.pastedFromClipboard', { name: this.charClone.attributes.name }),
       })
     },
     rawEditChar() {
@@ -449,21 +449,21 @@ export default {
         console.warn(err)
         this.$store.dispatch('showAlert', {
           type: 'error',
-          text: `XML parser fail: ${err.message}`,
+          text: this.$t('crewList.xmlParserFail', { err: err.message }),
         })
         return false
       }
       if (!newChar.attributes.name) {
         this.$store.dispatch('showAlert', {
           type: 'error',
-          text: `Failed to read character name - file may be invalid or corrupted`,
+          text: this.$t('crewList.readCharNameFail'),
         })
         return false
       }
       this.crewList.elements.unshift(newChar)
       this.$store.dispatch('showAlert', {
         type: 'success',
-        text: `Added new character: ${newChar.attributes.name}.`,
+        text: this.$t('crewList.addedNewChar', { name: newChar.attributes.name }),
       })
       return true
     },
@@ -507,7 +507,7 @@ export default {
       if (!exportCount)
         return this.$store.dispatch('showAlert', {
           type: 'info',
-          text: `Could not match any of the crew characters with their CharacterCampaignData`,
+          text: this.$t('crewList.couldNotMatch'),
         })
       let xmlString = gsHeader + desanitized_js2xml({ elements: [chData] }, { spaces: 4 })
       let a = document.createElement('a')
@@ -516,7 +516,7 @@ export default {
       a.click()
       this.$store.dispatch('showAlert', {
         type: 'success',
-        text: `Exported and prompted to download ${exportCount} player characters`,
+        text: this.$t('crewList.exportedPlayers', { count: exportCount }),
       })
     },
   },

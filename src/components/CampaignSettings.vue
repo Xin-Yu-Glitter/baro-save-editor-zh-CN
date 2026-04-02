@@ -1,7 +1,7 @@
 <template>
   <v-card elevation="1" class="pb-2">
     <v-card-header class="flex-column align-center">
-      <v-card-title> Campaign Settings </v-card-title>
+      <v-card-title> {{ $t('campaignSettings.campaignSettings') }} </v-card-title>
     </v-card-header>
     <v-sheet class="d-flex flex-column align-center">
       <!-- set max missions -->
@@ -9,7 +9,7 @@
         <v-text-field
           hide-details="true"
           density="comfortable"
-          label="Max Missions"
+          :label="$t('campaignSettings.maxMissions')"
           variant="outlined"
           style="color: white; min-width: 140px"
           v-model="maxmissions.inputVal.value"
@@ -24,11 +24,11 @@
           color="secondary"
           class="py-5"
         >
-          SET
+          {{ $t('campaignSettings.set') }}
         </v-btn>
       </div>
       <!-- toggle radiation -->
-      <h3 class="toolTitle">Radiation</h3>
+      <h3 class="toolTitle">{{ $t('campaignSettings.radiation') }}</h3>
       <div class="toolContent d-flex flex-row justify-space-between px-2">
         <v-btn
           variant="outlined"
@@ -36,7 +36,7 @@
           @click="radiation.toggle"
           :color="radiation.isEnabled.value ? 'secondary' : 'grey'"
         >
-          {{ !radiation.isEnabled.value ? 'Disabled' : 'Disable' }}
+          {{ !radiation.isEnabled.value ? $t('campaignSettings.disabled') : $t('campaignSettings.disable') }}
         </v-btn>
         <v-btn
           variant="outlined"
@@ -44,27 +44,27 @@
           @click="radiation.toggle"
           :color="!radiation.isEnabled.value ? 'secondary' : 'grey'"
         >
-          {{ radiation.isEnabled.value ? 'Enabled' : 'Enable' }}
+          {{ radiation.isEnabled.value ? $t('campaignSettings.enabled') : $t('campaignSettings.enable') }}
         </v-btn>
       </div>
       <!-- difficulty tweaker -->
-      <h3 class="toolTitle">Difficulty</h3>
+      <h3 class="toolTitle">{{ $t('campaignSettings.difficulty') }}</h3>
       <div class="toolContent d-flex flex-column px-2">
         <div class="mb-2">
-          Current average difficuly: <span class="text-secondary">{{ difficulty.avgDiff }}</span>
+          {{ $t('campaignSettings.currentAvgDiff') }}: <span class="text-secondary">{{ difficulty.avgDiff }}</span>
         </div>
         <div class="d-flex flex-row justify-space-between align-center">
           <v-text-field
             hide-details="true"
             density="comfortable"
-            label="New difficulty"
+            :label="$t('campaignSettings.newDifficulty')"
             variant="outlined"
             style="color: white; min-width: 140px"
             v-model="difficulty.inputVal.value"
             @keyup="difficulty.keyUp"
             class="mr-2 mb-0 text-white"
           />
-          <v-btn variant="outlined" @click="difficulty.click" color="secondary" class="py-5"> SET </v-btn>
+          <v-btn variant="outlined" @click="difficulty.click" color="secondary" class="py-5"> {{ $t('campaignSettings.set') }} </v-btn>
         </div>
       </div>
     </v-sheet>
@@ -100,12 +100,12 @@ function maxmissionsSetup() {
       store.getters.campaignSettings.attributes.MaxMissionCount = inputVal.value
       store.dispatch('showAlert', {
         type: 'success',
-        text: `Set max missions to "${inputVal.value}".`,
+        text: this.$t('campaignSettings.setMaxMissions', { value: inputVal.value }),
       })
     } else
       store.dispatch('showAlert', {
         type: 'info',
-        text: `Value must be a positive number.`,
+        text: this.$t('campaignSettings.mustBePositive'),
       })
   }
   function keyUp(ev) {
@@ -201,13 +201,13 @@ function difficultySetup() {
     } catch (err) {
       return store.dispatch('showAlert', {
         type: 'error',
-        text: `Invalid input: "${err}".`,
+        text: this.$t('campaignSettings.invalidInput', { err }),
       })
     }
     if (isNaN(newDiff))
       return store.dispatch('showAlert', {
         type: 'error',
-        text: `Invalid input: resulting value is NaN.`,
+        text: this.$t('campaignSettings.resultingNaN'),
       })
 
     let updatedCount = 0
@@ -226,7 +226,7 @@ function difficultySetup() {
     }
     store.dispatch('showAlert', {
       type: 'success',
-      text: `Updated difficulty in ${updatedCount} levels.`,
+      text: this.$t('campaignSettings.updatedDiff', { count: updatedCount }),
     })
   }
   function keyUp(ev) {

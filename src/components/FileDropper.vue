@@ -1,24 +1,24 @@
 <template>
   <v-card class="pa-4" elevation="1">
     <div class="d-flex flex-row align-center justify-center mb-1">
-      <div class="h3 mb-1">Drag a file below to load it:</div>
+      <div class="h3 mb-1">{{ $t('fileDropper.dragFileBelow') }}</div>
       <v-spacer></v-spacer>
       <!-- file path guess -->
       <div v-if="fromSubEditor" class="text-center">
-        Your submarine files are inside your <span class="text-primary">Barotrauma installation directory</span>
+        {{ $t('fileDropper.subFilesInside') }} <span class="text-primary">{{ $t('fileDropper.barotraumaDir') }}</span>
       </div>
       <div v-else class="text-center">
-        Your save files should be in <span class="text-primary">{{ saveLocation }}</span>
+        {{ $t('fileDropper.saveFilesShouldBeIn') }} <span class="text-primary">{{ saveLocation }}</span>
       </div>
       <!-- locate file dialog -->
       <v-btn @click.stop="fileLocDialog = true" size="x-small" icon>
         <v-icon>mdi-file-find-outline</v-icon>
-        <v-tooltip anchor="bottom" activator="parent">Where can I find my files?</v-tooltip>
+        <v-tooltip anchor="bottom" activator="parent">{{ $t('fileDropper.whereCanIFind') }}</v-tooltip>
       </v-btn>
       <v-dialog class="filedropper" v-model="fileLocDialog">
         <v-card>
           <v-card-title>
-            <span class="text-h5">Where are my {{ fromSubEditor ? '.sub' : '.save' }} files?</span>
+            <span class="text-h5">{{ $t('fileDropper.whereAreMy') }} {{ fromSubEditor ? '.sub' : '.save' }} {{ $t('fileDropper.files') }}</span>
             <v-spacer></v-spacer>
             <v-btn color="red" size="x-small" icon @click="fileLocDialog = false">
               <v-icon>mdi-close-thick</v-icon>
@@ -27,47 +27,47 @@
           <v-divider></v-divider>
           <!-- sub editor -->
           <v-card-text class="pl-8" v-if="fromSubEditor">
-            <div class="text-h6 text-center">Submarines are within Barotrauma installation dir:</div>
+            <div class="text-h6 text-center">{{ $t('fileDropper.subWithinBarotrauma') }}</div>
             <ul>
               <li>
-                Vanilla submarines:
+                {{ $t('fileDropper.vanillaSubs') }}:
                 <span class="text-primary"> Barotrauma/Submarines </span>
               </li>
               <li>
-                Downloaded temporarily when joining server:
-                <span class="text-primary"> Barotrauma/Submarines/Downloaded </span> (it's a hidden directory)
+                {{ $t('fileDropper.downloadedTemp') }}:
+                <span class="text-primary"> Barotrauma/Submarines/Downloaded </span> ({{ $t('fileDropper.hiddenDir') }})
               </li>
               <li>
-                Downloaded from Steam Workshop:
+                {{ $t('fileDropper.downloadedWorkshop') }}:
                 <span class="text-primary"> Barotrauma/Mods/[package name] </span>
               </li>
               <li>
-                Created or modified by you:
+                {{ $t('fileDropper.createdOrModified') }}:
                 <span class="text-primary"> Barotrauma/LocalMods/[package name] </span>
               </li>
             </ul>
             <br />
             <p class="text">
-              To open your Barotrauma dir, right click on it in Steam menu and select "Browse Local Files"
+              {{ $t('fileDropper.toOpenDir') }}
             </p>
             <v-img src="~@/assets/browseLocalFiles.png"></v-img>
           </v-card-text>
           <!-- save editor -->
           <v-card-text class="pl-8" v-else>
-            <div class="text-h6 text-center">Save location depends on your OS:</div>
+            <div class="text-h6 text-center">{{ $t('fileDropper.saveLocationOS') }}</div>
             <ul>
               <li>
-                Windows:
+                {{ $t('fileDropper.windows') }}:
                 <span class="text-primary">
                   C:\Users\%username%\AppData\Local\Daedalic Entertainment GmbH\Barotrauma
                 </span>
               </li>
               <li>
-                Linux:
+                {{ $t('fileDropper.linux') }}:
                 <span class="text-primary"> /home/$USER/.local/share/Daedalic Entertainment GmbH/ </span>
               </li>
               <li>
-                MacOS:
+                {{ $t('fileDropper.macos') }}:
                 <span class="text-primary"> /$USER/Library/Application Support/Daedalic Entertainment GmbH/ </span>
               </li>
             </ul>
@@ -77,12 +77,12 @@
       <!-- help dialog -->
       <v-btn @click.stop="helpDialog = true" size="x-small" icon>
         <v-icon>mdi-help-circle-outline</v-icon>
-        <v-tooltip anchor="bottom" activator="parent">What files can I load?</v-tooltip>
+        <v-tooltip anchor="bottom" activator="parent">{{ $t('fileDropper.whatFilesCanILoad') }}</v-tooltip>
       </v-btn>
       <v-dialog class="filedropper" v-model="helpDialog">
         <v-card>
           <v-card-title>
-            <span class="text-h5">What files can i load here?</span>
+            <span class="text-h5">{{ $t('fileDropper.whatFilesCanILoadHere') }}</span>
             <v-spacer></v-spacer>
             <v-btn color="red" size="x-small" icon @click="helpDialog = false">
               <v-icon>mdi-close-thick</v-icon>
@@ -91,30 +91,26 @@
           <v-divider></v-divider>
           <!-- sub editor -->
           <v-card-text class="pl-8" v-if="fromSubEditor">
-            <div class="text-h6 text-center">Submarine editor supports following files:</div>
+            <div class="text-h6 text-center">{{ $t('fileDropper.subEditorSupports') }}</div>
             <ul>
-              <li><span class="text-primary font-weight-bold">.sub</span> - Barotrauma submarine files</li>
-              <li><span class="text-primary text-bold">.xml</span> - Decompressed Barotrauma submarine files</li>
+              <li><span class="text-primary font-weight-bold">.sub</span> - {{ $t('fileDropper.barotraumaSubFiles') }}</li>
+              <li><span class="text-primary text-bold">.xml</span> - {{ $t('fileDropper.decompressedSubFiles') }}</li>
             </ul>
           </v-card-text>
           <!-- save editor -->
           <v-card-text class="pl-8" v-else>
             <div class="text-h6 text-center">
-              Save editor needs to load <span class="text-primary font-weight-bold">.save</span> file first, then it
-              accepts:
+              {{ $t('fileDropper.saveEditorNeeds') }} <span class="text-primary font-weight-bold">.save</span> {{ $t('fileDropper.fileFirstThen') }}
             </div>
             <ul>
               <li>
-                <span class="text-primary font-weight-bold">.sub</span> - Add a new owned submarine or update file of an
-                existing one
+                <span class="text-primary font-weight-bold">.sub</span> - {{ $t('fileDropper.addNewOrUpdate') }}
               </li>
               <li>
-                <span class="text-primary font-weight-bold">gamesession.xml</span> - Replace gamesession.xml inside the
-                loaded save
+                <span class="text-primary font-weight-bold">gamesession.xml</span> - {{ $t('fileDropper.replaceGamesession') }}
               </li>
               <li>
-                <span class="text-primary font-weight-bold">(...)_CharacterData.xml</span> - Import player characters
-                from multiplayer save as bots
+                <span class="text-primary font-weight-bold">(...)_CharacterData.xml</span> - {{ $t('fileDropper.importPlayersAsBots') }}
               </li>
             </ul>
           </v-card-text>

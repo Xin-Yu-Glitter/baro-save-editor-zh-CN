@@ -1,7 +1,7 @@
 <template>
   <v-card elevation="1" class="pb-2">
     <v-card-header class="flex-column align-center">
-      <v-card-title> Owned Submarines </v-card-title>
+      <v-card-title> {{ $t('ownedSubList.ownedSubmarines') }} </v-card-title>
     </v-card-header>
     <v-sheet class="mb-2">
       <v-sheet
@@ -10,7 +10,7 @@
         class="d-flex flex-row justify-center px-4"
       >
         <input
-          title="Set as currently used"
+          :title="$t('ownedSubList.setAsCurrentlyUsed')"
           class="selectedSub"
           type="radio"
           name="selectedOwnedSub"
@@ -19,13 +19,13 @@
         />
         <div class="subname">{{ sub }}</div>
         <v-spacer></v-spacer>
-        <v-icon title="Download submarine file" color="secondary" class="iconButton" @click="downloadSub(sub)">
+        <v-icon :title="$t('ownedSubList.downloadSub')" color="secondary" class="iconButton" @click="downloadSub(sub)">
           mdi-file-download-outline
         </v-icon>
-        <v-icon title="Edit submarine" color="secondary" class="iconButton" @click="editSub(sub)">
+        <v-icon :title="$t('ownedSubList.editSub')" color="secondary" class="iconButton" @click="editSub(sub)">
           mdi-clipboard-arrow-right-outline
         </v-icon>
-        <v-icon title="Delete submarine" color="red" class="iconButton" @click="deleteSub(sub)">
+        <v-icon :title="$t('ownedSubList.deleteSub')" color="red" class="iconButton" @click="deleteSub(sub)">
           mdi-delete-outline
         </v-icon>
       </v-sheet>
@@ -60,14 +60,14 @@ export default {
       if (index === -1) {
         this.$store.dispatch('showAlert', {
           type: 'error',
-          text: `Failed to delete ${subName} - not found in ownedSubmarines.`,
+          text: this.$t('ownedSubList.failedToDeleteOwned'),
         })
         return console.error(`Failed to delete ${subName} - not found in ownedSubmarines`)
       }
       this.ownedSubList.splice(index, 1)
       this.$store.dispatch('showAlert', {
         type: 'success',
-        text: `Removed "${subName}" from the owned submarines and "${subFilename}" file from the savefile.`,
+        text: this.$t('ownedSubList.removedSub', { subName, subFilename }),
       })
     },
     downloadSub(subName) {
@@ -96,7 +96,7 @@ export default {
       this.$store.state.gamesession.elements[0].attributes.submarine = subName
       this.$store.dispatch('showAlert', {
         type: 'success',
-        text: `Set current submarine to ${subName}.`,
+        text: this.$t('ownedSubList.setCurrentSub', { subName }),
       })
     },
   },

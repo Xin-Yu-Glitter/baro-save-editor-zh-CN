@@ -1,29 +1,29 @@
 <template>
   <v-card elevation="1" class="pb-2">
     <v-card-header class="flex-column align-center">
-      <v-card-title> Misc Tools </v-card-title>
+      <v-card-title> {{ $t('miscSaveTools.miscTools') }} </v-card-title>
     </v-card-header>
     <v-sheet class="d-flex flex-column align-center">
       <!-- gamesession.xml edit / download -->
       <div class="d-flex flex-row justify-space-between pr-2 toolContent mb-8" style="width: 100%; max-width: 320px">
-        <h3 class="toolTitle d-block">Gamesession.xml</h3>
+        <h3 class="toolTitle d-block">{{ $t('miscSaveTools.gamesessionXml') }}</h3>
         <v-spacer></v-spacer>
-        <v-icon title="Copy to clipboard" color="secondary" class="iconButton" @click="gameses.copy()">
+        <v-icon :title="$t('miscSaveTools.copyToClip')" color="secondary" class="iconButton" @click="gameses.copy()">
           mdi-clipboard-arrow-down-outline
         </v-icon>
-        <v-icon title="Paste from clipboard" color="secondary" class="iconButton" @click="gameses.paste()">
+        <v-icon :title="$t('miscSaveTools.pasteFromClip')" color="secondary" class="iconButton" @click="gameses.paste()">
           mdi-clipboard-arrow-up-outline
         </v-icon>
-        <v-icon title="Download" color="secondary" class="iconButton" @click="gameses.download()">
+        <v-icon :title="$t('miscSaveTools.download')" color="secondary" class="iconButton" @click="gameses.download()">
           mdi-file-download-outline
         </v-icon>
-        <v-icon title="Edit xml" color="secondary" class="iconButton" @click.stop="gameses.edit()">
+        <v-icon :title="$t('miscSaveTools.editXml')" color="secondary" class="iconButton" @click.stop="gameses.edit()">
           mdi-file-edit-outline
         </v-icon>
         <v-dialog class="fullscreen" v-model="gameses.dialog.value" fullscreen>
           <v-card class="d-flex flex-column" style="width: 100%; height: 100%">
             <v-card-title>
-              <span class="text-h5">Manualy edit gamesession.xml</span>
+              <span class="text-h5">{{ $t('miscSaveTools.manuallyEditGamesession') }}</span>
             </v-card-title>
             <v-card-text class="d-flex flex-grow-1">
               <textarea
@@ -34,32 +34,32 @@
             </v-card-text>
             <v-card-actions style="flex: 0 1 auto">
               <v-spacer></v-spacer>
-              <v-btn color="red darken-1" text @click="gameses.closeDialog()"> Cancel </v-btn>
-              <v-btn color="green darken-1" text @click="gameses.saveChanges()"> Save </v-btn>
+              <v-btn color="red darken-1" text @click="gameses.closeDialog()"> {{ $t('miscSaveTools.cancel') }} </v-btn>
+              <v-btn color="green darken-1" text @click="gameses.saveChanges()"> {{ $t('miscSaveTools.save') }} </v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
       </div>
       <!-- convert format -->
-      <h3 class="toolTitle">Save conversion</h3>
+      <h3 class="toolTitle">{{ $t('miscSaveTools.saveConversion') }}</h3>
       <div class="toolContent d-flex flex-row justify-space-between align-center px-2 mb-8">
         <div class="text">
-          Convert to a <span class="text-primary">{{ isMP ? 'single' : 'multi' }}-player</span> format:
+          {{ $t('miscSaveTools.convertTo') }} <span class="text-primary">{{ isMP ? $t('miscSaveTools.single') : $t('miscSaveTools.multi') }}</span>{{ $t('miscSaveTools.playerFormat') }}:
         </div>
         <v-spacer></v-spacer>
-        <v-btn title="Convert" @click="convert.click" size="x-small" icon>
+        <v-btn :title="$t('miscSaveTools.convert')" @click="convert.click" size="x-small" icon>
           <v-icon color="secondary">mdi-file-sync-outline</v-icon>
         </v-btn>
         <v-btn @click.stop="convert.dialog.value = true" size="x-small" icon>
           <v-icon>mdi-help-circle-outline</v-icon>
-          <v-tooltip anchor="bottom" activator="parent">Savefile format convertion info</v-tooltip>
+          <v-tooltip anchor="bottom" activator="parent">{{ $t('miscSaveTools.conversionInfo') }}</v-tooltip>
         </v-btn>
         <!-- info dialog -->
         <v-dialog class="convertInfo" v-model="convert.dialog.value">
           <v-card>
             <v-card-title>
               <span class="text-h5">{{
-                isMP ? 'Multi-player to single-player convertion' : 'Single-player to multi-player convertion'
+                isMP ? $t('miscSaveTools.mpToSpConv') : $t('miscSaveTools.spToMpConv')
               }}</span>
               <v-spacer></v-spacer>
               <v-btn color="red" size="x-small" icon @click="convert.dialog.value = false">
@@ -70,21 +70,18 @@
             <!-- MP to SP -->
             <v-card-text class="px-2" v-if="isMP">
               <div class="text">
-                - Hired bots will be turned into crew members<br />
+                {{ $t('miscSaveTools.mpToSpNote1') }}<br />
                 <br />
-                Please note that the player-controlled characters are not saved inside the .save file.<br />If you wish
-                to have them in single-player, you need to import them by loading
-                <span class="text-primary">(...)_CharacterData.xml"</span> file.
+                {{ $t('miscSaveTools.mpToSpNote2') }}<br />{{ $t('miscSaveTools.mpToSpNote3') }}
+                <span class="text-primary">(...)_CharacterData.xml"</span> {{ $t('miscSaveTools.mpToSpNote4') }}
               </div>
             </v-card-text>
             <!-- SP to MP -->
             <v-card-text class="px-2" v-else>
               <div class="text">
-                - Submarines you can purchase at the shipyard well be limited to a specific list. If you want to
-                purchase non-vanilla submarine, make sure to add its name to that list.<br />
-                - Current crew will be turned into bots.<br />
-                - Random campaign id will be generated. Make sure it's not conflicting with any of your other
-                multiplayer saves.<br />
+                {{ $t('miscSaveTools.spToMpNote1') }}<br />
+                {{ $t('miscSaveTools.spToMpNote2') }}<br />
+                {{ $t('miscSaveTools.spToMpNote3') }}
               </div>
             </v-card-text>
           </v-card>
@@ -95,7 +92,7 @@
         <v-text-field
           hide-details="true"
           density="comfortable"
-          label="Campaign ID"
+          :label="$t('miscSaveTools.campaignId')"
           variant="outlined"
           style="color: white; min-width: 140px"
           v-model="campaignId.inputVal.value"
@@ -110,7 +107,7 @@
           color="secondary"
           class="py-5"
         >
-          SET
+          {{ $t('miscSaveTools.set') }}
         </v-btn>
       </div>
       <!-- set money -->
@@ -118,7 +115,7 @@
         <v-text-field
           hide-details="true"
           density="comfortable"
-          label="Current Money"
+          :label="$t('miscSaveTools.currentMoney')"
           variant="outlined"
           style="color: white; min-width: 140px"
           v-model="money.inputVal.value"
@@ -133,7 +130,7 @@
           color="secondary"
           class="py-5"
         >
-          SET
+          {{ $t('miscSaveTools.set') }}
         </v-btn>
       </div>
     </v-sheet>
@@ -175,12 +172,12 @@ function moneySetup() {
       store.getters.campaign.attributes.money = inputVal.value
       store.dispatch('showAlert', {
         type: 'success',
-        text: `Set current money to "${inputVal.value}".`,
+        text: this.$t('miscSaveTools.setMoney', { value: inputVal.value }),
       })
     } else
       store.dispatch('showAlert', {
         type: 'info',
-        text: `Value must be a positive number.`,
+        text: this.$t('miscSaveTools.mustBePositive'),
       })
   }
   function keyUp(ev) {
@@ -208,12 +205,12 @@ function campaignIdSetup() {
       store.state.gamesession.elements[0].attributes.campaignid = inputVal.value
       store.dispatch('showAlert', {
         type: 'success',
-        text: `Set campaign ID to "${inputVal.value}".`,
+        text: this.$t('miscSaveTools.setCampaignId', { value: inputVal.value }),
       })
     } else
       store.dispatch('showAlert', {
         type: 'info',
-        text: `ID can't be empty.`,
+        text: this.$t('miscSaveTools.idCantEmpty'),
       })
   }
   function keyUp(ev) {
@@ -256,7 +253,7 @@ function gamesesSetup() {
       console.warn(err)
       store.dispatch('showAlert', {
         type: 'error',
-        text: `XML parser fail: ${err.message}`,
+        text: this.$t('miscSaveTools.xmlParserFail', { err: err.message }),
       })
       return
     }
@@ -267,13 +264,13 @@ function gamesesSetup() {
       store.commit('SET_GAMESESSION', newGameses)
       store.dispatch('showAlert', {
         type: 'success',
-        text: `Updated "gamesession.xml".`,
+        text: this.$t('miscSaveTools.updatedGamesession'),
       })
     } else {
       console.warn(`Failed to find campaign element in new gamesession - aborting`)
       store.dispatch('showAlert', {
         type: 'error',
-        text: `Campaign data not found in the gamesession - make sure the xml is correct. Changes were not saved.`,
+        text: this.$t('miscSaveTools.campaignNotFound'),
       })
     }
   }
@@ -288,7 +285,7 @@ function gamesesSetup() {
     await navigator.clipboard.writeText(xmlString)
     store.dispatch('showAlert', {
       type: 'success',
-      text: `Copied gamesession.xml to system clipboard.`,
+      text: this.$t('miscSaveTools.copiedGamesession'),
     })
   }
 
@@ -300,9 +297,9 @@ function gamesesSetup() {
     } catch (err) {
       console.warn(err)
       store.dispatch('showAlert', {
-        type: 'error',
-        text: `XML parser fail: ${err.message}`,
-      })
+          type: 'error',
+          text: this.$t('miscSaveTools.xmlParserFail', { err: err.message }),
+        })
       return
     }
     var campaign = newGameses.elements?.[0]?.elements?.find(
@@ -313,13 +310,13 @@ function gamesesSetup() {
       dialog.value = false
       store.dispatch('showAlert', {
         type: 'success',
-        text: `Pasted "gamesession.xml" from clipboard.`,
+        text: this.$t('miscSaveTools.pastedGamesession'),
       })
     } else {
       console.warn(`Failed to find campaign element in new gamesession - aborting`)
       store.dispatch('showAlert', {
         type: 'error',
-        text: `Campaign data not found in the gamesession - make sure the xml is correct.`,
+        text: this.$t('miscSaveTools.campaignNotFound'),
       })
     }
   }

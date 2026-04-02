@@ -1,14 +1,14 @@
 <template>
   <v-card elevation="1" class="pb-2">
     <v-card-header class="flex-column align-center">
-      <v-card-title> Misc Tools </v-card-title>
+      <v-card-title> {{ $t('miscSubTools.miscTools') }} </v-card-title>
     </v-card-header>
     <v-sheet class="d-flex flex-column align-center">
       <!-- set price -->
       <div class="toolContent d-flex flex-row justify-space-between align-center px-2">
         <v-text-field
           density="comfortable"
-          label="Change Price"
+          :label="$t('miscSubTools.changePrice')"
           variant="outlined"
           style="color: white; min-width: 140px"
           v-model="price.inputVal.value"
@@ -23,27 +23,27 @@
           color="secondary"
           class="py-5"
         >
-          SET
+          {{ $t('miscSubTools.set') }}
         </v-btn>
       </div>
       <!-- clean walls -->
-      <h3 class="toolTitle">Clean walls</h3>
+      <h3 class="toolTitle">{{ $t('miscSubTools.cleanWalls') }}</h3>
       <div class="toolContent d-flex flex-row justify-flex-start align-center px-2" style="width: 100%">
         <input style="width: auto" type="checkbox" v-model="wallClean.checkBoxVal.value" />
-        <div class="mx-2">Include shuttles</div>
+        <div class="mx-2">{{ $t('miscSubTools.includeShuttles') }}</div>
         <v-spacer></v-spacer>
-        <v-btn variant="outlined" @click="wallClean.click" color="secondary"> CLEAN </v-btn>
+        <v-btn variant="outlined" @click="wallClean.click" color="secondary"> {{ $t('miscSubTools.clean') }} </v-btn>
       </div>
       <!-- compact submarine -->
       <h3 class="toolTitle">
-        Compact sub
-        <v-btn class="ml-2" @click.stop="compact.dialog.value = true" size="x-small" icon title="Info">
+        {{ $t('miscSubTools.compactSub') }}
+        <v-btn class="ml-2" @click.stop="compact.dialog.value = true" size="x-small" icon :title="$t('miscSubTools.info')">
           <v-icon>mdi-help-circle-outline</v-icon>
         </v-btn>
         <v-dialog class="subCompactor" v-model="compact.dialog.value">
           <v-card>
             <v-card-title>
-              <span class="text-h5">"Compact" submarine tool</span>
+              <span class="text-h5">{{ $t('miscSubTools.compactSubTool') }}</span>
               <v-spacer></v-spacer>
               <v-btn color="red" size="x-small" icon @click="compact.dialog.value = false">
                 <v-icon>mdi-close-thick</v-icon>
@@ -51,15 +51,11 @@
             </v-card-title>
             <v-divider></v-divider>
             <v-card-text class="pl-8">
-              This tool allows you to significantly reduce file size of your submarine by replacing its preview image
-              with 4 black pixels. Example: removing preview image from one of my shuttles this was reduced its filesize
-              from 71KB to 9KB.<br />
-              <h5 class="text-h5">Compact Shuttles</h5>
-              This will remove preview images of all shuttles attached to the submarine. Preview images of shuttles
-              stored inside main submarine file aren't used anywhere in-game so stripping them has no downsides.
-              <h5 class="text-h5">Compact Sub</h5>
-              This will remove preview image of the loaded submarine, making its file smaller. If this is used on a main
-              submarine (not used as a shuttle), the lack of image will be noticeable.
+              {{ $t('miscSubTools.compactDescription') }}<br />
+              <h5 class="text-h5">{{ $t('miscSubTools.compactShuttles') }}</h5>
+              {{ $t('miscSubTools.compactShuttlesDesc') }}
+              <h5 class="text-h5">{{ $t('miscSubTools.compactSub') }}</h5>
+              {{ $t('miscSubTools.compactSubDesc') }}
             </v-card-text>
           </v-card>
         </v-dialog>
@@ -70,18 +66,18 @@
           :disabled="compact.linkedSubs.value.length === 0"
           @click="compact.clickShuttles"
           color="secondary"
-          :title="compact.linkedSubs.value.length === 0 ? 'No shuttles found' : 'Compact attached shuttles'"
+          :title="compact.linkedSubs.value.length === 0 ? $t('miscSubTools.noShuttles') : $t('miscSubTools.compactAttachedShuttles')"
         >
-          Shuttles
+          {{ $t('miscSubTools.shuttles') }}
         </v-btn>
         <v-btn
           variant="outlined"
           :disabled="compact.previewImage.value === ''"
           @click="compact.clickSub"
           color="secondary"
-          :title="compact.previewImage.value === '' ? 'No preview image found' : 'Compact main submarine'"
+          :title="compact.previewImage.value === '' ? $t('miscSubTools.noPreviewImage') : $t('miscSubTools.compactMainSub')"
         >
-          Sub
+          {{ $t('miscSubTools.sub') }}
         </v-btn>
       </div>
     </v-sheet>
@@ -115,12 +111,12 @@ function priceSetup() {
       store.getters.sub.attributes.price = inputVal.value
       store.dispatch('showAlert', {
         type: 'success',
-        text: `Set submarine price to "${inputVal.value}"`,
+        text: this.$t('miscSubTools.setPrice', { value: inputVal.value }),
       })
     } else
       store.dispatch('showAlert', {
         type: 'info',
-        text: `Value must be a positive number.`,
+        text: this.$t('miscSubTools.mustBePositive'),
       })
   }
   function keyUp(ev) {
@@ -160,12 +156,12 @@ function wallCleanSetup() {
     if (cleanedCount > 0) {
       store.dispatch('showAlert', {
         type: 'success',
-        text: `Cleaned stains from ${cleanedCount} walls.`,
+        text: this.$t('miscSubTools.cleanedWalls', { count: cleanedCount }),
       })
     } else
       store.dispatch('showAlert', {
         type: 'info',
-        text: `No stained walls found.`,
+        text: this.$t('miscSubTools.noStainedWalls'),
       })
   }
 
@@ -196,12 +192,12 @@ function compactSetup() {
     if (count > 0) {
       store.dispatch('showAlert', {
         type: 'success',
-        text: `Compacted ${count} shuttles.`,
+        text: this.$t('miscSubTools.compactedShuttles', { count }),
       })
     } else
       store.dispatch('showAlert', {
         type: 'info',
-        text: `No shuttles with preview images found.`,
+        text: this.$t('miscSubTools.noShuttlesWithPreview'),
       })
   }
   function clickSub() {
@@ -209,7 +205,7 @@ function compactSetup() {
       'iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAE0lEQVR4nGNkYGD4D8QMTAxQAAAOKAEDRx/UrAAAAABJRU5ErkJggg=='
     store.dispatch('showAlert', {
       type: 'success',
-      text: `Compacted main submarine.`,
+      text: this.$t('miscSubTools.compactedMainSub'),
     })
   }
 
