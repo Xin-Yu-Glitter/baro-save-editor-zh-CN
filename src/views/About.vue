@@ -2,6 +2,16 @@
   <v-container>
     <v-row>
       <v-col>
+        <v-sheet elevation="1" class="pa-2" style="text-align: center">
+          <b>
+            {{ $t('about.note') }}<br />
+            {{ $t('about.risk') }}
+          </b>
+        </v-sheet>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col>
         <v-sheet elevation="1" class="buttonWrapper">
           <v-btn :class="{ 'text-black': !subEditor }" color="secondary" class="mx-2" @click="subEditor = false">
             {{ $t('aboutSaveEditor.aboutSaveEditor') }}
@@ -9,16 +19,6 @@
           <v-btn :class="{ 'text-black': subEditor }" color="secondary" class="mx-2" @click="subEditor = true">
             {{ $t('aboutSubEditor.aboutSubEditor') }}
           </v-btn>
-        </v-sheet>
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col>
-        <v-sheet elevation="1" class="pa-2" style="text-align: center">
-          <b>
-            {{ $t('about.note') }}<br />
-            {{ $t('about.risk') }}
-          </b>
         </v-sheet>
       </v-col>
     </v-row>

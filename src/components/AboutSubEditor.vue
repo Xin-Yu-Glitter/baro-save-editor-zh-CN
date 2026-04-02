@@ -3,11 +3,11 @@
     <v-col>
       <v-sheet elevation="1" class="buttonWrapper">
         <v-btn color="secondary" variant="outlined" class="mx-2" @click="selectedComp = 'export'">
-          Export from file
+          {{ $t('aboutSubEditor.exportFromFile') }}
         </v-btn>
-        <v-btn color="secondary" variant="outlined" class="mx-2" @click="selectedComp = 'wirehider'">Wire Hider</v-btn>
-        <v-btn color="secondary" variant="outlined" class="mx-2" @click="selectedComp = 'script'">Run Script</v-btn>
-        <v-btn color="secondary" variant="outlined" class="mx-2" @click="selectedComp = 'misc'">Misc Tools</v-btn>
+        <v-btn color="secondary" variant="outlined" class="mx-2" @click="selectedComp = 'wirehider'">{{ $t('aboutSubEditor.wireHider') }}</v-btn>
+        <v-btn color="secondary" variant="outlined" class="mx-2" @click="selectedComp = 'script'">{{ $t('aboutSubEditor.runScript') }}</v-btn>
+        <v-btn color="secondary" variant="outlined" class="mx-2" @click="selectedComp = 'misc'">{{ $t('aboutSubEditor.miscTools') }}</v-btn>
       </v-sheet>
     </v-col>
   </v-row>
@@ -16,59 +16,59 @@
       <!-- export -->
       <v-card v-if="selectedComp === 'export'" elevation="1" class="aboutCard">
         <v-card-header>
-          <v-card-title class="text-h4">Export from file</v-card-title>
+          <v-card-title class="text-h4">{{ $t('aboutSubEditor.exportFromFile') }}</v-card-title>
         </v-card-header>
         <v-card-text>
-          <span class="text-h6">Allows to export preview image or shuttles from the submarine file.</span><br /><br />
-          Pressing <v-icon color="secondary">mdi-file-download-outline</v-icon> button triggers download.
+          <span class="text-h6">{{ $t('aboutSubEditor.allowsExportPreview') }}</span><br /><br />
+          {{ $t('aboutSubEditor.pressingButtonTriggers') }} <v-icon color="secondary">mdi-file-download-outline</v-icon> {{ $t('aboutSubEditor.buttonTriggers') }}.
         </v-card-text>
       </v-card>
       <!-- wire hider -->
       <v-card v-if="selectedComp === 'wirehider'" elevation="1" class="aboutCard">
         <v-card-header>
-          <v-card-title class="text-h4">Wire hider</v-card-title>
+          <v-card-title class="text-h4">{{ $t('aboutSubEditor.wireHider') }}</v-card-title>
         </v-card-header>
         <v-card-text>
-          <span class="text-h6"> A tool to make mass wire hiding easy. </span>
+          <span class="text-h6"> {{ $t('aboutSubEditor.toolToMakeMass') }} </span>
           <br /><br />
-          Just select desired wire color ("all" will affect all wires) and press buttons to hide or unhide them. This
-          tool uses the "hidden in game" property so the wires will still be visible in the in-game submarine editor.
+          {{ $t('aboutSubEditor.justSelectDesired') }} {{ $t('aboutSubEditor.andPressButtons') }}<br>
+          {{ $t('aboutSubEditor.thisToolUses') }} {{ $t('aboutSubEditor.wiresStillVisible') }}
         </v-card-text>
       </v-card>
       <!-- script -->
       <v-card v-if="selectedComp === 'script'" elevation="1" class="aboutCard">
         <v-card-header>
-          <v-card-title class="text-h4">Run script</v-card-title>
+          <v-card-title class="text-h4">{{ $t('aboutSubEditor.runScript') }}</v-card-title>
         </v-card-header>
         <v-card-text>
-          <span class="text-h6"> Edit submarine directly with a script. </span>
+          <span class="text-h6"> {{ $t('aboutSubEditor.editSubWithScript') }} </span>
           <br /><br />
-          Work-in-progress tool. Allows to directly edit your submarine with javascript.
+          {{ $t('aboutSubEditor.workInProgress') }} {{ $t('aboutSubEditor.allowsDirectEdit') }}
         </v-card-text>
       </v-card>
       <!-- misc -->
       <v-card v-if="selectedComp === 'misc'" elevation="1" class="aboutCard">
         <v-card-header>
-          <v-card-title class="text-h4">Miscellaneous tools</v-card-title>
+          <v-card-title class="text-h4">{{ $t('aboutSubEditor.miscTools') }}</v-card-title>
         </v-card-header>
         <v-card-text>
-          <br /><span class="text-h6"> Change Price </span><br />
-          Allows to change submarine price without any limits.
-          <br /><br /><span class="text-h6"> Clean walls </span><br />
-          Removes stains from background walls. Checkbox allows to also clean walls in shuttles.
-          <br /><br /><span class="text-h6"> Compact submarine </span><br />
-          Allows to massively reduce submarine file size by replacing preview images with 4 pixels.
+          <br /><span class="text-h6"> {{ $t('aboutSubEditor.changePrice') }} </span><br />
+          {{ $t('aboutSubEditor.allowsChangeSubmarine') }}
+          <br /><br /><span class="text-h6"> {{ $t('aboutSubEditor.cleanWalls') }} </span><br />
+          {{ $t('aboutSubEditor.removesStainsFrom') }}
+          <br /><br /><span class="text-h6"> {{ $t('aboutSubEditor.compactSubmarine') }} </span><br />
+          {{ $t('aboutSubEditor.allowsMassivelyReduce') }}
           <ul class="pl-8">
             <li>
-              <span class="text-secondary">SHUTTLES</span> button replaces preview images in all shuttles attached to
-              the main submarine.
+              <span class="text-secondary">{{ $t('aboutSubEditor.shuttlesButton') }}</span> {{ $t('aboutSubEditor.replacesPreviewImages') }}
+              {{ $t('aboutSubEditor.theMainSubmarine') }}
             </li>
-            <li><span class="text-secondary">SUB</span> button replaces preview image of main submarine.</li>
+            <li><span class="text-secondary">{{ $t('aboutSubEditor.subButton') }}</span> {{ $t('aboutSubEditor.replacesPreviewImage') }}</li>
           </ul>
-          Note that the shuttle images aren't used anywhere so removing them reduces file size with no downsides.
-          Removing the main submarine preview image will make it even lighter but it will deffinitely be notieable
-          in-game.<br />
-          If buttons are locked that means that there is no preview image or shuttles.
+          {{ $t('aboutSubEditor.noteShuttleImages') }}
+          {{ $t('aboutSubEditor.removingMainPreview') }}
+          {{ $t('aboutSubEditor.inGame') }}<br />
+          {{ $t('aboutSubEditor.ifButtonsLocked') }}
         </v-card-text>
       </v-card>
     </v-col>
