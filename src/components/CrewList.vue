@@ -106,7 +106,9 @@
                   <div class="text-h5">{{ $t('crewList.job') }}:</div>
                   <select :class="cloneJob.attributes.identifier" v-model="cloneJob.attributes.identifier">
                     <option class="captain" value="captain">{{ $t('crewList.captain') }}</option>
-                    <option class="securityofficer" value="securityofficer">{{ $t('crewList.securityOfficer') }}</option>
+                    <option class="securityofficer" value="securityofficer">
+                      {{ $t('crewList.securityOfficer') }}
+                    </option>
                     <option class="medicaldoctor" value="medicaldoctor">{{ $t('crewList.medicalDoctor') }}</option>
                     <option class="engineer" value="engineer">{{ $t('crewList.engineer') }}</option>
                     <option class="mechanic" value="mechanic">{{ $t('crewList.mechanic') }}</option>
@@ -214,16 +216,16 @@ export default {
         } catch (err) {
           console.warn(err)
           this.$store.dispatch('showAlert', {
-        type: 'error',
-        text: this.$t('crewList.xmlParserFail', { err: err.message }),
-      })
+            type: 'error',
+            text: this.$t('crewList.xmlParserFail', { err: err.message }),
+          })
           return
         }
         if (!newChar.attributes.name) {
           this.$store.dispatch('showAlert', {
-        type: 'error',
-        text: this.$t('crewList.readCharNameFail'),
-      })
+            type: 'error',
+            text: this.$t('crewList.readCharNameFail'),
+          })
           return
         }
         this.charClone = newChar

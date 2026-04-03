@@ -5,12 +5,6 @@ import router from '@/router'
 import store from '@/store'
 import i18n from '@/i18n'
 
-import { registerSW } from 'virtual:pwa-register'
-registerSW({
-  onNeedRefresh() {},
-  onOfflineReady() {},
-})
-
 import counter from '@/helpers/counter.dev'
 counter()
 

@@ -17,7 +17,7 @@ function createWindow() {
     win.webContents.openDevTools()
   } else {
     // 生产模式加载打包后的文件
-    win.loadFile(path.join(__dirname, 'dist/index.html'))
+    win.loadFile(path.join(__dirname, '..', 'dist', 'index.html'))
   }
 }
 

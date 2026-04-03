@@ -25,7 +25,12 @@
       >
         <div class="d-flex flex-row justify-center align-center">{{ sub.name }}</div>
         <v-spacer></v-spacer>
-        <v-icon :title="$t('shuttleExporter.download')" class="iconButton" color="secondary" @click="downloadShuttle(sub.object)">
+        <v-icon
+          :title="$t('shuttleExporter.download')"
+          class="iconButton"
+          color="secondary"
+          @click="downloadShuttle(sub.object)"
+        >
           mdi-file-download-outline
         </v-icon>
       </v-sheet>

@@ -5,7 +5,8 @@
         {{ $t('saveDataBar.download') }}
       </v-btn>
       <div class="float-right ma-1">
-        {{ $t('saveDataBar.loadedFile') }}: <span class="text-primary">{{ filename }}</span> , {{ $t('saveDataBar.saveDate') }}:
+        {{ $t('saveDataBar.loadedFile') }}: <span class="text-primary">{{ filename }}</span> ,
+        {{ $t('saveDataBar.saveDate') }}:
         <span class="text-primary">{{ modificationDate }}</span>
       </div>
     </v-card>

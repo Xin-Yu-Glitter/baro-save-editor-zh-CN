@@ -18,7 +18,10 @@
       <v-dialog class="filedropper" v-model="fileLocDialog">
         <v-card>
           <v-card-title>
-            <span class="text-h5">{{ $t('fileDropper.whereAreMy') }} {{ fromSubEditor ? '.sub' : '.save' }} {{ $t('fileDropper.files') }}</span>
+            <span class="text-h5"
+              >{{ $t('fileDropper.whereAreMy') }} {{ fromSubEditor ? '.sub' : '.save' }}
+              {{ $t('fileDropper.files') }}</span
+            >
             <v-spacer></v-spacer>
             <v-btn color="red" size="x-small" icon @click="fileLocDialog = false">
               <v-icon>mdi-close-thick</v-icon>
@@ -93,24 +96,27 @@
           <v-card-text class="pl-8" v-if="fromSubEditor">
             <div class="text-h6 text-center">{{ $t('fileDropper.subEditorSupports') }}</div>
             <ul>
-              <li><span class="text-primary font-weight-bold">.sub</span> - {{ $t('fileDropper.barotraumaSubFiles') }}</li>
+              <li>
+                <span class="text-primary font-weight-bold">.sub</span> - {{ $t('fileDropper.barotraumaSubFiles') }}
+              </li>
               <li><span class="text-primary text-bold">.xml</span> - {{ $t('fileDropper.decompressedSubFiles') }}</li>
             </ul>
           </v-card-text>
           <!-- save editor -->
           <v-card-text class="pl-8" v-else>
             <div class="text-h6 text-center">
-              {{ $t('fileDropper.saveEditorNeeds') }} <span class="text-primary font-weight-bold">.save</span> {{ $t('fileDropper.fileFirstThen') }}
+              {{ $t('fileDropper.saveEditorNeeds') }} <span class="text-primary font-weight-bold">.save</span>
+              {{ $t('fileDropper.fileFirstThen') }}
             </div>
             <ul>
+              <li><span class="text-primary font-weight-bold">.sub</span> - {{ $t('fileDropper.addNewOrUpdate') }}</li>
               <li>
-                <span class="text-primary font-weight-bold">.sub</span> - {{ $t('fileDropper.addNewOrUpdate') }}
+                <span class="text-primary font-weight-bold">gamesession.xml</span> -
+                {{ $t('fileDropper.replaceGamesession') }}
               </li>
               <li>
-                <span class="text-primary font-weight-bold">gamesession.xml</span> - {{ $t('fileDropper.replaceGamesession') }}
-              </li>
-              <li>
-                <span class="text-primary font-weight-bold">(...)_CharacterData.xml</span> - {{ $t('fileDropper.importPlayersAsBots') }}
+                <span class="text-primary font-weight-bold">(...)_CharacterData.xml</span> -
+                {{ $t('fileDropper.importPlayersAsBots') }}
               </li>
             </ul>
           </v-card-text>

@@ -14,7 +14,9 @@
         mdi-clipboard-arrow-left-outline
       </v-icon>
       <div class="float-right ma-1">
-        {{ $t('subDataBar.loadedFile') }}: <span class="text-primary">{{ filename }}</span> ,   {{ $t('subDataBar.submarineName') }}:
+        {{ $t('subDataBar.loadedFile') }}: <span class="text-primary">{{ filename }}</span> ,   {{
+          $t('subDataBar.submarineName')
+        }}:
         <span class="text-primary">{{ subname }}</span>
       </div>
     </v-card>

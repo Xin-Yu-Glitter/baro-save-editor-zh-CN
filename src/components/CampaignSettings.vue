@@ -64,7 +64,9 @@
             @keyup="difficulty.keyUp"
             class="mr-2 mb-0 text-white"
           />
-          <v-btn variant="outlined" @click="difficulty.click" color="secondary" class="py-5"> {{ $t('campaignSettings.set') }} </v-btn>
+          <v-btn variant="outlined" @click="difficulty.click" color="secondary" class="py-5">
+            {{ $t('campaignSettings.set') }}
+          </v-btn>
         </div>
       </div>
     </v-sheet>

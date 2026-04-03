@@ -18,5 +18,6 @@ PWA安装方式:<br><br>
 `npm install` - 安装node插件依赖
 
 - `npm run dev` - 启动开发服务器
-- `npm run build` - 构建至./dist
+- `npm run build` - 启动 Web 构建，构建至./dist
 - `npm run preview` - 启动本地服务器，预览生产构建版本
+- `npm run electron:build` - 启动 Electron 构建

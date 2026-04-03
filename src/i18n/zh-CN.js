@@ -15,8 +15,10 @@ export default {
     note: '注意:在用下载的文件替换原始文件之前，请务必备份原始文件。',
     risk: '即使以前某些功能或设置有效，但请牢记：由于游戏更新导致某些功能发生损坏的风险始终存在。',
     ifEditorFreezes: '如果本编辑器出现问题，如发生崩溃、或未响应、或输出了不可用的文件，您可以随时创建一个',
-    githubIssue: 'GitHub Issue',
+    githubIssue1: 'GitHub Issue（原作者）',
     attachingOriginal: '，附加原始文件并提供问题复现步骤。',
+    additionalWord: '当然，由于原作者已将原仓库存档，因此问题并不一定会得到及时的解决。如果遇到汉化相关问题，也欢迎为我提交一个issue：',
+    githubIssue2: 'GitHub Issue（汉化作者QK）',
   },
   aboutSaveEditor: {
     aboutSaveEditor: '关于存档编辑器',
@@ -66,7 +68,8 @@ export default {
     limitations: '但这存在一些局限性，',
     namesAndUsesIt: '存档编辑器会临时保存一份与角色名称相对应的Steam数据列表，并在导出玩家角色时使用。',
     characterWonTAllowExport: '这意味着更改角色的“originalname”将无法使其正确导出。',
-    fileSoWonTBe: '此外，无法将此列表安全地存储在存档文件中，因此它不会存储在那里，这意味着下载修改后的存档并再次加载后，导出选项将消失。',
+    fileSoWonTBe:
+      '此外，无法将此列表安全地存储在存档文件中，因此它不会存储在那里，这意味着下载修改后的存档并再次加载后，导出选项将消失。',
     gamesessionXmlTools: 'Gamesession.xml工具',
     fourButtonsAllowing: '四个按钮,允许直接编辑gamesession.xml文件:',
     copiesContentsTo: '将gamesession.xml内容复制到剪贴板',
@@ -127,7 +130,8 @@ export default {
     yourSaveLocation: '您的存档文件应在',
     copyPath: '复制路径到剪贴板',
     warning: '警告',
-    warningText: '此工具使用实验性文件系统API - 在某些浏览器中可能无法正常工作。它也无法访问某些系统文件所在的目录（包括AppData目录中的任何内容 - 因此您需要将想要解压缩的存档复制到可访问的位置）。',
+    warningText:
+      '此工具使用实验性文件系统API - 在某些浏览器中可能无法正常工作。它也无法访问某些系统文件所在的目录（包括AppData目录中的任何内容 - 因此您需要将想要解压缩的存档复制到可访问的位置）。',
     selectWorkingDir: '选择工作目录',
     none: '无',
     refreshDir: '刷新目录',
@@ -335,10 +339,13 @@ export default {
     compactSub: '压缩潜艇',
     info: '信息',
     compactSubTool: '"压缩"潜艇工具',
-    compactDescription: '此工具允许您通过将预览图像替换为4个黑色像素来显著减小潜艇文件大小。例如：从我的一架小艇（潜艇？）上移除预览图像后，其文件大小从71KB减少到9KB。',
+    compactDescription:
+      '此工具允许您通过将预览图像替换为4个黑色像素来显著减小潜艇文件大小。例如：从我的一架小艇（潜艇？）上移除预览图像后，其文件大小从71KB减少到9KB。',
     compactShuttles: '压缩小艇',
-    compactShuttlesDesc: '这将移除附加到潜艇的所有小艇的预览图像。存储在主潜艇文件内的小艇穿梭机预览图像在游戏中任何地方都未使用，因此移除它们没有负面影响。',
-    compactSubDesc: '这将移除已加载潜艇的预览图像，使其文件更小。如果在主潜艇（不用作穿梭机）上使用，缺少图像将很明显。',
+    compactShuttlesDesc:
+      '这将移除附加到潜艇的所有小艇的预览图像。存储在主潜艇文件内的小艇穿梭机预览图像在游戏中任何地方都未使用，因此移除它们没有负面影响。',
+    compactSubDesc:
+      '这将移除已加载潜艇的预览图像，使其文件更小。如果在主潜艇（不用作穿梭机）上使用，缺少图像将很明显。',
     shuttles: '小艇',
     sub: '潜艇',
     noShuttles: '未找到小艇',
@@ -353,5 +360,4 @@ export default {
     noShuttlesWithPreview: '未找到带有预览图像的小艇。',
     compactedMainSub: '已压缩主潜艇。',
   },
-
 }

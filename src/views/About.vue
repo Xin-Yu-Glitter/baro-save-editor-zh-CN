@@ -29,9 +29,13 @@
         <v-sheet elevation="1" class="pa-2" style="text-align: center">
           {{ $t('about.ifEditorFreezes') }}
           <a style="color: rgb(var(--v-theme-secondary))" href="https://github.com/ignis05/baro-save-editor/issues">
-            {{ $t('about.githubIssue') }}
+            {{ $t('about.githubIssue1') }}
           </a>
-          {{ $t('about.attachingOriginal') }}
+          {{ $t('about.attachingOriginal') }}<br>
+          {{ $t('about.additionalWord') }}
+          <a style="color: rgb(var(--v-theme-secondary))" href="https://github.com/Xin-Yu-Glitter/baro-save-editor-zh-CN/issues">
+            {{ $t('about.githubIssue2') }}
+          </a>
         </v-sheet>
       </v-col>
     </v-row>

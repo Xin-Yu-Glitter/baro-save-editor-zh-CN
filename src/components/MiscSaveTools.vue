@@ -11,7 +11,12 @@
         <v-icon :title="$t('miscSaveTools.copyToClip')" color="secondary" class="iconButton" @click="gameses.copy()">
           mdi-clipboard-arrow-down-outline
         </v-icon>
-        <v-icon :title="$t('miscSaveTools.pasteFromClip')" color="secondary" class="iconButton" @click="gameses.paste()">
+        <v-icon
+          :title="$t('miscSaveTools.pasteFromClip')"
+          color="secondary"
+          class="iconButton"
+          @click="gameses.paste()"
+        >
           mdi-clipboard-arrow-up-outline
         </v-icon>
         <v-icon :title="$t('miscSaveTools.download')" color="secondary" class="iconButton" @click="gameses.download()">
@@ -44,7 +49,9 @@
       <h3 class="toolTitle">{{ $t('miscSaveTools.saveConversion') }}</h3>
       <div class="toolContent d-flex flex-row justify-space-between align-center px-2 mb-8">
         <div class="text">
-          {{ $t('miscSaveTools.convertTo') }} <span class="text-primary">{{ isMP ? $t('miscSaveTools.single') : $t('miscSaveTools.multi') }}</span>{{ $t('miscSaveTools.playerFormat') }}:
+          {{ $t('miscSaveTools.convertTo') }}
+          <span class="text-primary">{{ isMP ? $t('miscSaveTools.single') : $t('miscSaveTools.multi') }}</span
+          >{{ $t('miscSaveTools.playerFormat') }}:
         </div>
         <v-spacer></v-spacer>
         <v-btn :title="$t('miscSaveTools.convert')" @click="convert.click" size="x-small" icon>
@@ -58,9 +65,7 @@
         <v-dialog class="convertInfo" v-model="convert.dialog.value">
           <v-card>
             <v-card-title>
-              <span class="text-h5">{{
-                isMP ? $t('miscSaveTools.mpToSpConv') : $t('miscSaveTools.spToMpConv')
-              }}</span>
+              <span class="text-h5">{{ isMP ? $t('miscSaveTools.mpToSpConv') : $t('miscSaveTools.spToMpConv') }}</span>
               <v-spacer></v-spacer>
               <v-btn color="red" size="x-small" icon @click="convert.dialog.value = false">
                 <v-icon>mdi-close-thick</v-icon>
@@ -297,9 +302,9 @@ function gamesesSetup() {
     } catch (err) {
       console.warn(err)
       store.dispatch('showAlert', {
-          type: 'error',
-          text: this.$t('miscSaveTools.xmlParserFail', { err: err.message }),
-        })
+        type: 'error',
+        text: this.$t('miscSaveTools.xmlParserFail', { err: err.message }),
+      })
       return
     }
     var campaign = newGameses.elements?.[0]?.elements?.find(

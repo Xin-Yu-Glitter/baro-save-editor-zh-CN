@@ -40,12 +40,17 @@ export default {
       if (count > 0)
         this.$store.dispatch('showAlert', {
           type: 'success',
-          text: this.$t('wireHider.setWiresTo', { count, hidden: setToBool ? this.$t('wireHider.hidden') : this.$t('wireHider.visible') }),
+          text: this.$t('wireHider.setWiresTo', {
+            count,
+            hidden: setToBool ? this.$t('wireHider.hidden') : this.$t('wireHider.visible'),
+          }),
         })
       else
         this.$store.dispatch('showAlert', {
           type: 'info',
-          text: this.$t('wireHider.allWiresAlready', { type: setToBool ? this.$t('wireHider.hidden') : this.$t('wireHider.visible') }),
+          text: this.$t('wireHider.allWiresAlready', {
+            type: setToBool ? this.$t('wireHider.hidden') : this.$t('wireHider.visible'),
+          }),
         })
     },
     unhideWires() {

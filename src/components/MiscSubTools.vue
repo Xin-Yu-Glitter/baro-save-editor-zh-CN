@@ -37,7 +37,13 @@
       <!-- compact submarine -->
       <h3 class="toolTitle">
         {{ $t('miscSubTools.compactSub') }}
-        <v-btn class="ml-2" @click.stop="compact.dialog.value = true" size="x-small" icon :title="$t('miscSubTools.info')">
+        <v-btn
+          class="ml-2"
+          @click.stop="compact.dialog.value = true"
+          size="x-small"
+          icon
+          :title="$t('miscSubTools.info')"
+        >
           <v-icon>mdi-help-circle-outline</v-icon>
         </v-btn>
         <v-dialog class="subCompactor" v-model="compact.dialog.value">
@@ -66,7 +72,11 @@
           :disabled="compact.linkedSubs.value.length === 0"
           @click="compact.clickShuttles"
           color="secondary"
-          :title="compact.linkedSubs.value.length === 0 ? $t('miscSubTools.noShuttles') : $t('miscSubTools.compactAttachedShuttles')"
+          :title="
+            compact.linkedSubs.value.length === 0
+              ? $t('miscSubTools.noShuttles')
+              : $t('miscSubTools.compactAttachedShuttles')
+          "
         >
           {{ $t('miscSubTools.shuttles') }}
         </v-btn>
@@ -75,7 +85,9 @@
           :disabled="compact.previewImage.value === ''"
           @click="compact.clickSub"
           color="secondary"
-          :title="compact.previewImage.value === '' ? $t('miscSubTools.noPreviewImage') : $t('miscSubTools.compactMainSub')"
+          :title="
+            compact.previewImage.value === '' ? $t('miscSubTools.noPreviewImage') : $t('miscSubTools.compactMainSub')
+          "
         >
           {{ $t('miscSubTools.sub') }}
         </v-btn>

@@ -5,9 +5,15 @@
         <v-btn color="secondary" variant="outlined" class="mx-2" @click="selectedComp = 'export'">
           {{ $t('aboutSubEditor.exportFromFile') }}
         </v-btn>
-        <v-btn color="secondary" variant="outlined" class="mx-2" @click="selectedComp = 'wirehider'">{{ $t('aboutSubEditor.wireHider') }}</v-btn>
-        <v-btn color="secondary" variant="outlined" class="mx-2" @click="selectedComp = 'script'">{{ $t('aboutSubEditor.runScript') }}</v-btn>
-        <v-btn color="secondary" variant="outlined" class="mx-2" @click="selectedComp = 'misc'">{{ $t('aboutSubEditor.miscTools') }}</v-btn>
+        <v-btn color="secondary" variant="outlined" class="mx-2" @click="selectedComp = 'wirehider'">{{
+          $t('aboutSubEditor.wireHider')
+        }}</v-btn>
+        <v-btn color="secondary" variant="outlined" class="mx-2" @click="selectedComp = 'script'">{{
+          $t('aboutSubEditor.runScript')
+        }}</v-btn>
+        <v-btn color="secondary" variant="outlined" class="mx-2" @click="selectedComp = 'misc'">{{
+          $t('aboutSubEditor.miscTools')
+        }}</v-btn>
       </v-sheet>
     </v-col>
   </v-row>
@@ -19,8 +25,10 @@
           <v-card-title class="text-h4">{{ $t('aboutSubEditor.exportFromFile') }}</v-card-title>
         </v-card-header>
         <v-card-text>
-          <span class="text-h6">{{ $t('aboutSubEditor.allowsExportPreview') }}</span><br /><br />
-          {{ $t('aboutSubEditor.pressingButtonTriggers') }} <v-icon color="secondary">mdi-file-download-outline</v-icon> {{ $t('aboutSubEditor.buttonTriggers') }}.
+          <span class="text-h6">{{ $t('aboutSubEditor.allowsExportPreview') }}</span
+          ><br /><br />
+          {{ $t('aboutSubEditor.pressingButtonTriggers') }}
+          <v-icon color="secondary">mdi-file-download-outline</v-icon> {{ $t('aboutSubEditor.buttonTriggers') }}.
         </v-card-text>
       </v-card>
       <!-- wire hider -->
@@ -31,7 +39,7 @@
         <v-card-text>
           <span class="text-h6"> {{ $t('aboutSubEditor.toolToMakeMass') }} </span>
           <br /><br />
-          {{ $t('aboutSubEditor.justSelectDesired') }} {{ $t('aboutSubEditor.andPressButtons') }}<br>
+          {{ $t('aboutSubEditor.justSelectDesired') }} {{ $t('aboutSubEditor.andPressButtons') }}<br />
           {{ $t('aboutSubEditor.thisToolUses') }} {{ $t('aboutSubEditor.wiresStillVisible') }}
         </v-card-text>
       </v-card>
@@ -60,10 +68,14 @@
           {{ $t('aboutSubEditor.allowsMassivelyReduce') }}
           <ul class="pl-8">
             <li>
-              <span class="text-secondary">{{ $t('aboutSubEditor.shuttlesButton') }}</span> {{ $t('aboutSubEditor.replacesPreviewImages') }}
+              <span class="text-secondary">{{ $t('aboutSubEditor.shuttlesButton') }}</span>
+              {{ $t('aboutSubEditor.replacesPreviewImages') }}
               {{ $t('aboutSubEditor.theMainSubmarine') }}
             </li>
-            <li><span class="text-secondary">{{ $t('aboutSubEditor.subButton') }}</span> {{ $t('aboutSubEditor.replacesPreviewImage') }}</li>
+            <li>
+              <span class="text-secondary">{{ $t('aboutSubEditor.subButton') }}</span>
+              {{ $t('aboutSubEditor.replacesPreviewImage') }}
+            </li>
           </ul>
           {{ $t('aboutSubEditor.noteShuttleImages') }}
           {{ $t('aboutSubEditor.removingMainPreview') }}

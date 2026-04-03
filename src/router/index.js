@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory, createWebHashHistory } from 'vue-router'
 import i18n from '@/i18n'
 
 const routes = [
@@ -57,8 +57,13 @@ const routes = [
   },
 ]
 
+// const isElectron = import.meta.env.MODE === 'electron'
+const isElectron = window.location.protocol === 'file:'
+
 const router = createRouter({
-  history: createWebHistory('/baro-save-editor/'),
+  history: isElectron
+    ? createWebHashHistory()
+    : createWebHistory('/baro-save-editor/'),
   routes,
 })
 

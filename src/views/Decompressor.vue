@@ -112,8 +112,9 @@
               <li><v-icon color="secondary">mdi-package-variant</v-icon> {{ $t('decompressor.step3') }}</li>
               <li><v-icon color="secondary">mdi-package-variant-closed</v-icon> {{ $t('decompressor.step4') }}</li>
               <li>
-                {{ $t('decompressor.step5') }} <v-icon color="secondary">mdi-folder-sync-outline</v-icon> {{ $t('decompressor.step5a') }}
-                <v-icon color="secondary">mdi-folder-search-outline</v-icon> {{ $t('decompressor.step5b') }}.
+                {{ $t('decompressor.step5') }} <v-icon color="secondary">mdi-folder-sync-outline</v-icon>
+                {{ $t('decompressor.step5a') }} <v-icon color="secondary">mdi-folder-search-outline</v-icon>
+                {{ $t('decompressor.step5b') }}.
               </li>
             </ol>
             {{ $t('decompressor.overwriteNote') }}
@@ -161,9 +162,9 @@ export default {
         // window.showDirectoryPicker is not a function
         if (err instanceof TypeError) {
           return this.$store.dispatch('showAlert', {
-          type: 'error',
-          text: this.$t('decompressor.fileSystemApiFail'),
-        })
+            type: 'error',
+            text: this.$t('decompressor.fileSystemApiFail'),
+          })
         }
         // user canceled file selector - do nothing
         if (err instanceof DOMException) {
