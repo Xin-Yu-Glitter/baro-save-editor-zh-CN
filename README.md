@@ -1,15 +1,13 @@
 # 汉化自ignis05的baro-save-editor项目
 使用Vue-i18n进行了国际化处理，中文文本进行了初步人工校对，英文文本仅提取，未校对。<br>
-使用Electron进行打包，因此可以进一步提供离线exe版本。<br><br>
+使用Electron进行打包，因此提供离线exe版本。<br>
+考虑到转移至exe应用形式，因此去除了PWA部分。<br><br>
 原项目仓库：https://github.com/ignis05/baro-save-editor<br>
 原作者在线服务：https://ignis05.github.io/baro-save-editor
 
 # 潜渊症存档与潜艇编辑器工具
 
 基于Vue3、Vite2、Vuetify3 Beta开发，完全基于客户端浏览器运行。<br>
-PWA安装方式:<br><br>
-![pwa showcase](https://i.imgur.com/QeCvVXQ.png)
-<br>
 
 ## 关于项目部署
 
@@ -18,6 +16,8 @@ PWA安装方式:<br><br>
 `npm install` - 安装node插件依赖
 
 - `npm run dev` - 启动开发服务器
-- `npm run build` - 启动 Web 构建，构建至./dist
+- `npm run build` - 启动 Web 构建
 - `npm run preview` - 启动本地服务器，预览生产构建版本
-- `npm run electron:build` - 启动 Electron 构建
+- 
+- `npm run electron:dev` - 启动Electron构建并启动开发测试
+- `npm run electron:build` - 启动 Electron 构建并打包至release
